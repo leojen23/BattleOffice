@@ -1,0 +1,24 @@
+{# {% extends 'base.html.twig' %}
+{% block body %}
+{{form_start(form)}}
+ {# {{form_widget(form)}} #}
+
+ {# {{ dump(form.children.product.vars.choices[1].data.id) }} #}
+{# {% for product in form.children.product.vars.choices %} #}
+{# {{ dump(form) }} #}
+{# {% endfor %} #}
+{# {{form_end(form)}} #}
+
+{# {% endblock %} #} 
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% include 'landing_page/partials/form_new.html.twig' %}
+</div>
+
+
+{% endblock %}
