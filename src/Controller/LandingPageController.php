@@ -13,10 +13,11 @@ use App\Form\ProductType;
 use App\Form\Entity;
 use App\Form\OrderType;
 
-
+use Symfony\Component\Form\FormEvent;
 use App\Manager\OrderManager;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,22 +35,23 @@ class LandingPageController extends AbstractController
         $order = new Order();
 
         $form = $this->createForm(OrderType::class, $order);
+        // dump($order);
         $form->handleRequest($request);
-        
+        // dump($order);
+
         if ($form->isSubmitted() && $form->isValid()) 
         
-        {
-            $entityManager = $this->getDoctrine()->getManager();
+        { 
+            $entityManager = $this->getDoctrine()->getManager(); 
             $entityManager->persist($order);
             $entityManager->flush();
-            dd($order);
-            return $this->redirectToRoute('landing_page');
+            // dd($order);
+            return $this->redirectToRoute('confirmation');
         }
         
         // dd($request->request);
         return $this->render('landing_page/index_new.html.twig', [
-             'order' => $order,
-             
+            'order' => $order,
             'form' => $form->createView(),
         ]);
     }

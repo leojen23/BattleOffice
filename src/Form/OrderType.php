@@ -12,13 +12,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
         $builder
             ->add('client', ClientType::class)
             ->add('product', EntityType::class, 
@@ -28,15 +29,36 @@ class OrderType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
             ])
-            
              ->add('payment_method')
-             
+             ->addEventListener(
+                FormEvents::PRE_SUBMIT,
+                function (FormEvent $event) {
+                    // dump($event);
+                    /**
+                     * If delivery address is untouched, clone billing
+                     * address before form handling and validation.
+                     * 
+                     * https://symfony.com/doc/current/form/events.html
+                     */
+                    $data = $event->getData();
+                    if (empty(implode("", $data['client']['shipping']))) {
+                        
+                        foreach ($data['client']['shipping'] as $key => $value){
 
+                            $data['client']['shipping'][$key] = $data['client'][$key];
+                        }
+
+                    // }
+                   
+                }
+                $event->setData($data);
+            })
+             
             // ->add('is_paid')
             // ->add('created_at')
         ;
     }
-
+ 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

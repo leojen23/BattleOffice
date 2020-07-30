@@ -28,6 +28,7 @@ class ShippingType extends AbstractType
                 'class' => Country::class,
                 'choice_label' => 'name',
                 'multiple' => false,
+                'required' => false,
             ])
             // ->add('client')
         ;

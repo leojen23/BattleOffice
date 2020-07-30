@@ -30,6 +30,7 @@ class ClientType extends AbstractType
                 'class' => Country::class,
                 'choice_label' => 'name',
                 'multiple' => false,
+                'required' => false,
             ])
             // ->add('created_at')
             
