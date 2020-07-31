@@ -28,10 +28,7 @@ class Order
      */
     private $is_paid;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true, options={"default":false})
-     */
-    private $created_at;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orders")
@@ -42,6 +39,16 @@ class Order
      * @ORM\OneToOne(targetEntity=Client::class, inversedBy="client_order", cascade={"persist", "remove"})
      */
     private $client;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $api_id;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Payment::class, cascade={"persist", "remove"})
+     */
+    private $payment;
 
     public function getId(): ?int
     {
@@ -72,17 +79,7 @@ class Order
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
 
     public function getProduct(): ?Product
     {
@@ -104,6 +101,30 @@ class Order
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getApiId(): ?int
+    {
+        return $this->api_id;
+    }
+
+    public function setApiId(?int $api_id): self
+    {
+        $this->api_id = $api_id;
+
+        return $this;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }

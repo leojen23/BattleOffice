@@ -2,19 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Client;
-use App\Entity\Country;
-use App\Entity\Shipping;
+
 use App\Entity\Product;
 use App\Entity\Order;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class OrderType extends AbstractType
 {
@@ -48,14 +45,12 @@ class OrderType extends AbstractType
                             $data['client']['shipping'][$key] = $data['client'][$key];
                         }
 
-                    // }
-                   
                 }
                 $event->setData($data);
             })
              
             // ->add('is_paid')
-            // ->add('created_at')
+   
         ;
     }
  

@@ -16,6 +16,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+
     <section class="countdown bg_brand_secondary">
         <div class="container-fluid">
             <div class="row">
@@ -38,6 +39,7 @@
             </div>
         </div>
     </section>
+    
     {{form_start(form , { 'attr' : {
         'method' : 'post'
     }})}}
@@ -59,7 +61,7 @@
                         </div>
                         
                         <label class="cure-radio">
-                            <input name="order[cart][cart_products][0]" value="{{form.children.product.vars.choices[1].data.id}}" type="radio">
+                            <input value="{{form.children.product.vars.choices[1].data.id}}" type="radio">
                             <article>
                                 <div class="card center-align">
                                     <div class="row">
@@ -101,7 +103,7 @@
                             </article>
                         </label>
                         <label class="cure-radio">
-                            <input name="order[cart][cart_products][0]" value="{{form.children.product.vars.choices[2].data.id}}" type="radio" checked="checked">
+                            <input  value="{{form.children.product.vars.choices[2].data.id}}" type="radio" checked="checked">
                             <article>
                                 <div class="card center-align">
                                     <div class="row">
@@ -145,7 +147,7 @@
                         </label>
                         <label class="cure-radio">
                   
-                            <input name="order[cart][cart_products][0]" value="{{form.children.product.vars.choices[3].data.id}}" type="radio">
+                            <input value="{{form.children.product.vars.choices[3].data.id}}" type="radio">
                             <article>
                                 <div class="card center-align">
                                     <div class="row">
