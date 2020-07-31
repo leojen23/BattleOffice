@@ -50,14 +50,13 @@ class LandingPageController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
+
             $entityManager = $this->getDoctrine()->getManager(); 
             $entityManager->persist($order);
             $entityManager->flush();
            
              // store orderApi response in a variable as a value has to be stored in a variable.
              $response = $this->orderApi($order);
-
 
             //conversion reponse Api from Json to array
              $apiResponseContent = $response->toArray();
@@ -71,7 +70,6 @@ class LandingPageController extends AbstractController
             return $this->redirectToRoute('payment', 
             [
                 'id' => $order->getId(),
-              
             ]
             
             );
